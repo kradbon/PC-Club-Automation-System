@@ -1,0 +1,7 @@
+@extends('layouts.dashboard')
+@section('title', 'Tournament management | GB CLUB')
+@section('content')
+<div class="mx-auto max-w-[1440px] px-5 py-12 lg:px-10"><p class="font-mono text-[10px] uppercase tracking-[.3em] text-acid">GB CLUB / ADMIN / COMPETITIVE PLAY</p><div class="mt-3 flex flex-wrap items-end justify-between gap-4"><h1 class="font-display text-5xl font-bold">TOURNAMENTS</h1><a class="font-mono text-[10px] uppercase text-acid" href="{{ route('admin.dashboard') }}">← Dashboard</a></div>
+<h2 class="mb-4 mt-8 font-display text-2xl font-bold">Create tournament</h2>@include('admin.partials.tournament-form')
+<h2 class="mb-4 mt-12 font-display text-2xl font-bold">Manage existing tournaments</h2><div class="space-y-4">@forelse($tournaments as $tournament)<details class="border border-white/10 bg-white/[.025] p-4"><summary class="cursor-pointer list-none"><span class="font-display text-xl font-bold">{{ $tournament->localized('name') }}</span><span class="ml-3 font-mono text-[9px] uppercase text-acid">{{ $tournament->status }}</span><span class="ml-3 text-xs text-white/45">{{ $tournament->game }} / {{ $tournament->starts_at?->format('M j, Y') }}</span></summary><div class="mt-5">@include('admin.partials.tournament-form',['tournament'=>$tournament])</div></details>@empty<p class="text-white/50">No tournaments created yet.</p>@endforelse</div><div class="mt-6">{{ $tournaments->links() }}</div></div>
+@endsection
